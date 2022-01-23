@@ -17,6 +17,13 @@
   margin: 0 auto;
 }
 
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .about-project__content {
+    width: calc(100% - 2*50px);
+    min-height: 585px;
+  }
+}
+
 .about-project__heading {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
@@ -29,6 +36,12 @@
   padding: 110px 0 23px;
   border-bottom: 1px solid #000000;
   width: 100%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .about-project__heading {
+    padding: 90px 0 23px;
+  }
 }
 
 .about-project__common-about-container {
@@ -63,6 +76,12 @@
   margin: 70px 0 26px;
 }
 
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .about-project__about-heading {
+    margin: 70px 0 22px;
+  }
+}
+
 .about-project__about-text {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
@@ -70,6 +89,23 @@
   font-size: 14px;
   line-height: 20px;
   margin: 0 0 110px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .about-project__about-text {
+    margin: 0 0 93px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .about-project__about-text {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;
+    }
 }
 
 .about-project__timing {
@@ -81,11 +117,17 @@
 .about-project__term {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 228px);
+  width: 100%;
 }
 
 .about-project__term:first-child {
   width: 228px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .about-project__term:first-child {
+    width: 140px;
+  }
 }
 
 .about-project__first-timing-text {
@@ -103,6 +145,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .about-project__first-timing-text {
+    width: 140px;
+  }
 }
 
 .about-project__second-timing-text {
@@ -131,13 +179,4 @@
   text-align: center;
   color: #A0A0A0;
   margin: 14px 0 0; 
-}
-
-.about-project__second-timing {
-  background-color: #F2F2F2;
-  max-width: 912px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

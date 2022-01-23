@@ -26,7 +26,12 @@
   margin: 0 auto;
   display: flex;
   flex-direction: row;
+}
 
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .header__content {
+    width: calc(100% - 2*30px);
+  }  
 }
 
 .header__logo {
