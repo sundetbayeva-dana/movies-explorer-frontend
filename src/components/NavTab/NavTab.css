@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../vendor/fonts/Inter-Medium.woff2") format("woff2"),
+      url("../../vendor/fonts/Inter-Medium.woff") format("woff");
+}
+
+.nav {
+  background-color: #F5F5F5;  
+}
+
+.nav__content {
+  width: calc(100% - 2*70px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 66px;
+}
+
+.nav__link {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-decoration-line: underline;
+  color: #000000;
+  margin: 0 0 0 40px;
+}
+
+.nav__link:first-child {
+  margin: 0;
+}

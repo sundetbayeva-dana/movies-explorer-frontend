@@ -1,0 +1,15 @@
+.search-form {
+  background-color: #FAFAFA;
+}
+
+.search-form__content {
+  width: calc(100% - 2*70px);
+  margin: 0 auto;
+  min-height: 217px;
+}
+
+.search-form__line-container {
+  display: flex;
+  flex-direction: row;
+  margin: 70px 0 0;
+}
