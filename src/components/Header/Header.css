@@ -31,69 +31,13 @@
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .header__content {
     width: calc(100% - 2*30px);
-  }  
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .header__logo {
   margin: 18px 0 0;
 }
 
-.header__nav {
-  margin: 28px 0 0 44px;
-  display: flex;
-  align-self: flex-start;
-}
 
-.header__link {
-  font-family: 'Inter', Arial, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 18px;
-  color: #000000;
-  text-decoration: none;
-  margin: 0 0 0 16px;
-}
-
-.header__link:first-child {
-  margin: 0;
-}
-
-.header__link_active {
-  font-family: 'Inter', Arial, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 18px;
-  text-align: right;
-  color: #000000;
-  text-decoration: none;
-  margin: 0 0 0 16px;
-}
-
-.header__button-account {
-  border: 2px solid rgba(170, 170, 170, 0.2);
-  box-sizing: border-box;
-  border-radius: 50px;
-  width: 100px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 21px 0 0 auto; 
-}
-
-.header__button-account:hover {
-  opacity: .8;
-  cursor: pointer;
-}
-
-.header__button-text {
-  font-family: 'Inter', Arial, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  color: #000000;
-  margin: 0 0 0 7px;
-}

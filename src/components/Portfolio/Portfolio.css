@@ -85,3 +85,7 @@
   max-height: 59px;
   background: url(../../images/link.svg) no-repeat center;
 }
+
+.portfolio__link:hover {
+  opacity: 0.7;
+}
