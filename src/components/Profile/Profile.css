@@ -26,6 +26,8 @@
   width: calc(100% - 2*435px);
   margin: 0 auto;
   flex-direction: column;
+  justify-content: center;
+
 }
 
 .profile__heading {

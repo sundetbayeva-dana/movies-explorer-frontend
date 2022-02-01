@@ -4,7 +4,8 @@ import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from '../Profile/Profile'
+import Profile from '../Profile/Profile';
+import Login from '../Login/Login'
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
         </Route>
         <Route path="/saved-movies" element={<SavedMovies />}>
         </Route>
-        <Route path="/profile" element={<Profile name="Дана" email="pochta@yandex.ru" />}>
+        <Route path="/profile" element={<Profile currentName="Дана" currentEmail="pochta@yandex.ru" />}>
+        </Route>
+        <Route path="/signin" element={<Login errorMessage="Что-то пошло не так..." />}>
         </Route>
       </Routes>
     </div>
