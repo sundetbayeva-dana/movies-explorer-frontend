@@ -16,11 +16,11 @@
        url("../../vendor/fonts/Inter-Regular.woff") format("woff");
 }
 
-.login {
+.register {
   background-color: #FAFAFA;
 }
 
-.login__content {
+.register__content {
   min-height: 700px;
   display: flex;
   width: calc(100% - 2*442px);
@@ -29,42 +29,42 @@
 }
 
 @media screen and (min-width: 1150px) and (max-width: 1279px) {
-  .login__content {
+  .register__content {
     width: calc(100% - 2*400px);
   }
 }
 
 @media screen and (min-width: 1050px) and (max-width: 1149px) {
-  .login__content {
+  .register__content {
     width: calc(100% - 2*300px);
   }
 }
 
 @media screen and (min-width: 900px) and (max-width: 1049px) {
-  .login__content {
+  .register__content {
     width: calc(100% - 2*250px);
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 899px) {
-  .login__content {
+  .register__content {
     width: calc(100% - 2*186px);
   }
 }
 
-.login__logo {
+.register__logo {
   width: 38px;
   height: 38px;
   margin: 70px 0 40px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
-  .login__logo {
+  .register__logo {
     margin: 232px 0 40px;
   }
 }
 
-.login__heading {
+.register__heading {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -75,7 +75,7 @@
   margin: 0 0 34px;
 }
 
-.login__form-label {
+.register__form-label {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -84,7 +84,7 @@
   color: #A0A0A0;
 }
 
-.login__form-input {
+.register__form-input {
   width: calc(100% - 2*15px);
   height: 16px;
   background: #F4F4F4;
@@ -99,11 +99,11 @@
   margin: 10px 0;
 }
 
-.login__form-input:last-child {
+.register__form-input:last-child {
   color: #EE3465;
 }
 
-.login__error-text {
+.register__error-text {
   color: #EE3465;
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
@@ -113,21 +113,21 @@
   margin: 0;
 }
 
-.login__button-register {
+.register__button-register {
   width: 100%;
   height: 45px;
   background: #3456F3;
   border-radius: 3px;
-  margin: 150px 0 0;
+  margin: 69px 0 0;
   border: none;
 }
 
-.login__button-login:hover {
+.register__button-register:hover {
   opacity: 0.8;
   cursor: pointer;
 }
 
-.login__button-text {
+.register__button-text {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -136,10 +136,9 @@
   text-align: center;
   color: #FFFFFF;
   margin: 0 auto;
-
 }
 
-.login__text {
+.register__text {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -147,16 +146,16 @@
   line-height: 17px;
   text-align: center;
   color: #A0A0A0;
-  margin: 16px 0 0;
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
-  .login__text {
+  .register__text {
     margin: 16px 0 232px;
   }
 }
 
-.login__text-link {
+.register__text-link {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -168,6 +167,6 @@
   margin-left: 6px;
 }
 
-.login__text-link:hover {
+.register__text-link:hover {
   opacity: 0.7;
 }

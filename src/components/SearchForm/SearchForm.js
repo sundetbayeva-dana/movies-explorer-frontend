@@ -1,7 +1,6 @@
 import React from 'react';
 import './SearchForm.css';
 import searchIcon from '../../images/icon-search.svg';
-import Preloader from '../Preloader/Preloader';
 
 function SearchForm () {
   return (

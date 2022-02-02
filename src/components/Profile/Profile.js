@@ -4,9 +4,6 @@ import Header from '../Header/Header';
 
 function Profile ({currentName, currentEmail}) {
 
-  // const [nameValue, setNameValue] = React.useState(`${name}`)
-  // const [emailValue, setEmailValue] = React.useState(`${email}`)
-
   const [data, setData] = React.useState({
     name: '',
     email: '',
