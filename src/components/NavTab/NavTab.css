@@ -21,6 +21,12 @@
   min-height: 66px;
 }
 
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .nav-tab__content {
+    width: calc(100% - 2*53px);
+  }
+}
+
 .nav-tab__link {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
@@ -32,6 +38,14 @@
   text-decoration-line: underline;
   color: #000000;
   margin: 0 0 0 40px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .nav-tab__link {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 0 0 24px;
+  }
 }
 
 .nav-tab__link:first-child {

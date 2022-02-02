@@ -45,12 +45,8 @@ function Register ({errorMessage}) {
         
         <p className="register__text">Уже зарегистрированы?
           <Link to="/" className="register__text-link">Войти</Link>
-        </p>
-        
+        </p>        
       </div>
-      
-
-          
     </div>
   )
 }

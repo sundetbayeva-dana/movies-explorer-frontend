@@ -112,7 +112,7 @@
     width: 44px;
     height: 44px;
     border: none;
-    margin: 15px 0 0;
+    margin: 15px 0;
     padding: 0;
   }
 
@@ -131,7 +131,6 @@
     background-color: #FAFAFA;
     width: 520px;
     margin: 0 0 0 auto;
-
   }
 
   .nav__nav {
@@ -139,7 +138,7 @@
     flex-direction: column;
     margin-top: 160px;
     align-items: center;
-    margin-left: -22px;
+    margin-left: 74px;
   }
 
   .nav__link {
@@ -168,7 +167,7 @@
     border: none;
     position: relative;
     top: 27px;
-    left: 310px;
+    left: 407px;
   }
   
   .nav__button-close:hover {
@@ -176,4 +175,110 @@
     cursor: pointer;
   }
 
+  .nav__button-account {
+    position: relative;
+    top: 903px;
+    left: -150px;
+  }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .nav_size_768 {
+    display: flex;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity .3s linear;
+    background-color: rgba(0, 0, 0, .3);
+  }
+
+  .nav_size_768_visible {
+    display: flex;
+    visibility: visible;
+    opacity: 1; 
+  }
+
+  .nav__button-menu {
+    display: flex;
+    background: url(../../images/icon-menu.png) no-repeat center;
+    width: 22px;
+    height: 25px;
+    border: none;
+    margin: 24px 9px 0 0;
+    padding: 0;
+  }
+
+  .nav__menu-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .nav__menu-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: #FAFAFA;
+    width: 100%;
+    margin: 0;
+  }
+
+  .nav__nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 144px;
+    align-items: center;
+    margin-left: 84px;
+
+  }
+
+  .nav__link {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    margin: 0 auto 24px;
+    text-decoration: none;
+    width: max-content;
+  }
+
+  .nav__link_active {
+    padding: 0 0 7px;
+    margin: 0 auto 14px;
+    border-bottom: 2px solid #000000;
+  }
+
+  .nav__button-close {
+    background: url(../../images/button-close.svg) no-repeat center;
+    box-sizing: border-box;
+    width: 22px;
+    height: 22px;
+    border: none;
+    position: relative;
+    top: 19px;
+    left: 321px;
+    padding: 9px;
+  }
+  
+  .nav__button-close:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
+  .nav__button-account {
+    position: relative;
+    top: 702px;
+    left: -150px;
+  }
 }

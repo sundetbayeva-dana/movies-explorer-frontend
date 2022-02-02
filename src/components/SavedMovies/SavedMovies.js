@@ -21,7 +21,7 @@ function SavedMovies() {
         <MoviesCardList>
           <MoviesCard isDeleted='true' image={moviePic1} />
           <MoviesCard isDeleted='true' image={moviePic2} />
-          <MoviesCard isDeleted='true' image={moviePic3} />
+          {/* <MoviesCard isDeleted='true' image={moviePic3} /> */}
         </MoviesCardList>
       </div>
       <Footer />
