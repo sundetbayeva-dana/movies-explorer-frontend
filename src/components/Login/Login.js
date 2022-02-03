@@ -31,7 +31,7 @@ function Login ({errorMessage}) {
           <label className="login__form-label" htmlFor="login__email">E-mail</label>
           <input className="login__form-input" id="login__email" type="email" value={email} onChange={handleChangeEmail} placeholder="Заполните поле email" required></input>
           <label className="login__form-label" htmlFor="login__password" >Пароль</label>
-          <input className="login__form-input" id="login__password" type="password" value={password} onChange={handleChangePassword} placeholder="Заполните поле пароль" required></input>
+          <input className="login__form-input" id="login__password" type="password" value={password} onChange={handleChangePassword} placeholder="Заполните поле пароль" minLength={3} maxLength={30} required></input>
           <p className={errorTextClassName}>{errorMessage}</p>
           <button className="login__button-login" type="submit">
           <p className="login__button-text">Войти</p>

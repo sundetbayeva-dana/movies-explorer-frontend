@@ -115,11 +115,11 @@
 }
 
 .techs__list {
-  list-style-type: none;
   display: flex;
   margin: 0 auto;
   justify-content: center;  
   padding: 0;
+  list-style-type: none;
 }
 
 @media screen and (min-width: 401px) and (max-width: 767px) {
@@ -166,7 +166,7 @@
   margin: 0;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1280px) {
+@media screen and (min-width: 768px) and (max-width: 1279px) {
   .techs__item {
     font-size: 12px;
     line-height: 15px;

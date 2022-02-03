@@ -18,7 +18,8 @@ function Navigation () {
         </button>
       </div>
       <button className="nav__button-menu"></button>
-      <div className="nav_size_768 nav_size_768_visible">
+      <div className="nav_size_768">
+      {/* nav_size_768_visible */}
         
         <div className="nav__menu-overlay"></div>
         <div className="nav__menu-content">

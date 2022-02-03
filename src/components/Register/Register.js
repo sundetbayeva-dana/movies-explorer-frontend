@@ -35,11 +35,11 @@ function Register ({errorMessage}) {
         <h1 className="register__heading">Добро пожаловать!</h1>
         <form>
           <label className="register__form-label" htmlFor="register__name">Имя</label>
-          <input className="register__form-input" id="register__name" type="text" value={name} onChange={handleChangeName} placeholder="Заполните поле имя пользователя" required></input>
+          <input className="register__form-input" id="register__name" type="text" value={name} onChange={handleChangeName} placeholder="Заполните поле имя пользователя" minLength={2} maxLength={20} required></input>
           <label className="register__form-label" htmlFor="register__email">E-mail</label>
           <input className="register__form-input" id="register__email" type="email" value={email} onChange={handleChangeEmail} placeholder="Заполните поле email" required></input>
           <label className="register__form-label" htmlFor="register__password">Пароль</label>
-          <input className="register__form-input" id="register__password" type="password" value={password} onChange={handleChangePassword} placeholder="Заполните поле пароль" required></input>
+          <input className="register__form-input" id="register__password" type="password" value={password} onChange={handleChangePassword} placeholder="Заполните поле пароль" minLength={3} maxLength={30} required></input>
           <p className={errorTextClassName}>{errorMessage}</p>
           <button className="register__button-register" type="submit">
           <p className="register__button-text">Зарегистрироваться</p>

@@ -34,7 +34,7 @@ function Profile ({currentName, currentEmail}) {
           <form className="profile__form">
             <div className="profile__input-container">
               <label className="profile__form-label" htmlFor="profile__name">Имя</label>
-              <input className="profile__form-input" id="profile__name" name="name" type="text" value={data.name || ''} onChange={handleChange} placeholder="Заполните поле имя пользователя" required></input>
+              <input className="profile__form-input" id="profile__name" name="name" type="text" value={data.name || ''} onChange={handleChange} placeholder="Заполните поле имя пользователя" minLength={2} maxLength={20} required></input>
             </div>
             <div className="profile__input-container">
               <label className="profile__form-label" htmlFor="profile__email">E-mail</label>
