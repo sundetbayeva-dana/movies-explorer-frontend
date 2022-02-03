@@ -1,6 +1,5 @@
 import React from 'react';
 import './AboutMe.css';
-import { Link } from 'react-router-dom';
 import photo from '../../images/001.jpg';
 
 function AboutMe () {
@@ -13,9 +12,8 @@ function AboutMe () {
           <div className="about-me__text-info">
             <h3 className ="about-me__name">Дана</h3>
             <p className ="about-me__brief-info">Фронтенд разработчик, 26 лет</p>
-            <p className ="about-me__about">Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена 
-            и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
-            <Link to="#" className="about-me__link-social">Github</Link> 
+            <p className ="about-me__about">Я живу в Челябинске, закончила высшую школу электроники и компьютерных наук ЮУрГУ. Я люблю слушать музыку, петь и играть на фортепиано. Недавно начала кодить. С 2018 года работала в компании НТЦ "Комплексные системы".</p>
+            <a href="https://github.com/sundetbayeva-dana" target="_blank" rel="noopener noreferrer" className="about-me__link-social">Github</a>
           </div>               
         </div>
       </div>

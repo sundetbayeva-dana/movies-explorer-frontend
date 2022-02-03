@@ -34,14 +34,15 @@ function Movies() {
           <MoviesCard image={moviePic3} />
           <MoviesCard image={moviePic4} />
           <MoviesCard image={moviePic5} />
-          {/* <MoviesCard isSaved='true' image={moviePic6} />
-          <MoviesCard isSaved='true' image={moviePic7} />
-          <MoviesCard image={moviePic8} /> */}
 
-          {/* <MoviesCard image={moviePic9} />
+          <MoviesCard isSaved='true' image={moviePic6} />
+          <MoviesCard isSaved='true' image={moviePic7} />
+          <MoviesCard image={moviePic8} />
+
+          <MoviesCard image={moviePic9} />
           <MoviesCard image={moviePic10} />
           <MoviesCard isSaved='true' image={moviePic11} />
-          <MoviesCard image={moviePic12} /> */}
+          <MoviesCard image={moviePic12} />
       </MoviesCardList>
       <Footer />
     </div>

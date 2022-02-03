@@ -34,11 +34,11 @@ function Profile ({currentName, currentEmail}) {
           <form className="profile__form">
             <div className="profile__input-container">
               <label className="profile__form-label" htmlFor="profile__name">Имя</label>
-              <input className="profile__form-input" id="profile__name" name="name" type="text" value={data.name || ''} onChange={handleChange}></input>
+              <input className="profile__form-input" id="profile__name" name="name" type="text" value={data.name || ''} onChange={handleChange} placeholder="Заполните поле имя пользователя" required></input>
             </div>
             <div className="profile__input-container">
               <label className="profile__form-label" htmlFor="profile__email">E-mail</label>
-              <input className="profile__form-input" id="profile__email" name="email" type="email" value={data.email || ''} onChange={handleChange}></input>
+              <input className="profile__form-input" id="profile__email" name="email" type="email" value={data.email || ''} onChange={handleChange} placeholder="Заполните поле email" required></input>
             </div>
             <button className="profile__button-edit">Редактировать</button>
             <button className="profile__button-exit">Выйти из аккаунта</button>

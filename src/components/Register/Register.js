@@ -28,15 +28,18 @@ function Register ({errorMessage}) {
   return (
     <div className="register">
       <div className="register__content">
-        <img src={logo} alt="Логотип сайта" className="register__logo" />
+        <Link to="/" className="register__logo-link">
+          <img src={logo} alt="Логотип сайта" className="register__logo" />
+        </Link>
+        
         <h1 className="register__heading">Добро пожаловать!</h1>
         <form>
           <label className="register__form-label" htmlFor="register__name">Имя</label>
-          <input className="register__form-input" id="register__name" type="text" value={name} onChange={handleChangeName} required></input>
+          <input className="register__form-input" id="register__name" type="text" value={name} onChange={handleChangeName} placeholder="Заполните поле имя пользователя" required></input>
           <label className="register__form-label" htmlFor="register__email">E-mail</label>
-          <input className="register__form-input" id="register__email" type="email" value={email} onChange={handleChangeEmail} required></input>
+          <input className="register__form-input" id="register__email" type="email" value={email} onChange={handleChangeEmail} placeholder="Заполните поле email" required></input>
           <label className="register__form-label" htmlFor="register__password">Пароль</label>
-          <input className="register__form-input" id="register__password" type="password" value={password} onChange={handleChangePassword} required></input>
+          <input className="register__form-input" id="register__password" type="password" value={password} onChange={handleChangePassword} placeholder="Заполните поле пароль" required></input>
           <p className={errorTextClassName}>{errorMessage}</p>
           <button className="register__button-register" type="submit">
           <p className="register__button-text">Зарегистрироваться</p>

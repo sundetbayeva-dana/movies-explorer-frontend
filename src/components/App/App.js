@@ -25,8 +25,6 @@ function App() {
         </Route>
         <Route path="/signin" element={<Login />}>
         </Route>
-        <Route path="/not-found" element={<NotFound />}>
-        </Route>
       </Routes>
     </div>
   );

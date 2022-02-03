@@ -58,22 +58,28 @@
   }
 }
 
-.register__logo {
+.register__logo-link {
   width: 38px;
   height: 38px;
   margin: 70px 0 40px;
 }
 
+
 @media screen and (min-width: 768px) and (max-width: 1279px) {
-  .register__logo {
+  .register__logo-link {
     margin: 232px 0 40px;
   }
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-  .register__logo {
+  .register__logo-link {
     margin: 56px auto 0;
   }
+}
+
+
+.register__logo-link:hover {
+  opacity: .7;
 }
 
 .register__heading {
