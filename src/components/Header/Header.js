@@ -6,7 +6,7 @@ import Navigation from '../Navigation/Navigation';
 
 
 
-function Header () {  
+function Header ({onMenuClick, isMenuVisible, onCloseButton}) {  
 
   return (
     <div className="header">
@@ -16,7 +16,8 @@ function Header () {
 
           </Link>
 
-        <Navigation />
+        <Navigation onMenuClick={onMenuClick} isMenuVisible={isMenuVisible}
+        onCloseButton={onCloseButton} />
       </div>
       
     </div>

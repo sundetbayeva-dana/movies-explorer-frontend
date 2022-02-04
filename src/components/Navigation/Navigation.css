@@ -152,6 +152,7 @@
     margin: 0 auto 28px;
     text-decoration: none;
     width: max-content;
+    transition: visibility 0s, opacity .3s linear;
   }
 
   .nav__link_active {

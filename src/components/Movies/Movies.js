@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../Header/Header';
 import Preloader from '../Preloader/Preloader';
 import SearchForm  from '../SearchForm/SearchForm';
@@ -7,42 +7,75 @@ import Footer from '../Footer/Footer';
 import MoviesCard from '../MoviesCard/MoviesCard'
 import './Movies.css';
 
-import moviePic1 from '../../images/posters/pic__movie1.jpg'
-import moviePic2 from '../../images/posters/pic__movie2.jpg'
-import moviePic3 from '../../images/posters/pic__movie3.jpg'
-import moviePic4 from '../../images/posters/pic__movie4.jpg'
-import moviePic5 from '../../images/posters/pic__movie5.jpg'
-import moviePic6 from '../../images/posters/pic__movie6.jpg'
-import moviePic7 from '../../images/posters/pic__movie7.jpg'
-import moviePic8 from '../../images/posters/pic__movie8.jpg'
-import moviePic9 from '../../images/posters/pic__movie9.jpg'
-import moviePic10 from '../../images/posters/pic__movie10.jpg'
-import moviePic11 from '../../images/posters/pic__movie11.jpg'
-import moviePic12 from '../../images/posters/pic__movie12.jpg'
+import moviesApi from '../../utils/MoviesApi'
 
+function Movies({onMenuClick, isMenuVisible, onCloseButton}) {
 
-function Movies() {
+  // const [allMovie, setAllMovie] = React.useState({})
+  const [cards, setCards] = React.useState([])
+
+  const [index , setIndex] = React.useState(0)
+  const [visibleData , setVisibleData] = React.useState([])
+  const [INITIAL_CARDS_COUNT, setINITIAL_CARDS_COUNT] = React.useState(0)
+
+  useEffect(() => {
+    if (document.documentElement.clientWidth > 768 ) {
+      setINITIAL_CARDS_COUNT(12)
+    } 
+    if (document.documentElement.clientWidth > 480 && document.documentElement.clientWidth < 768) {
+      setINITIAL_CARDS_COUNT(8)
+    } else if (document.documentElement.clientWidth <= 320) {
+      setINITIAL_CARDS_COUNT(5)
+    }
+    const numberOfItems =  INITIAL_CARDS_COUNT + ( index );
+    const newCardArray = [];
+    for(let i=0 ;i<cards.length ; i++ ){
+      if(i < numberOfItems) 
+        newCardArray.push(cards[i])
+    }
+    setVisibleData(newCardArray);
+  }, [cards, index, INITIAL_CARDS_COUNT])
+  
+  useEffect(() => {
+    setCards(JSON.parse(localStorage.getItem('dataMovie')))
+  },[])
+
+  function handleSubmitClick() {
+    moviesApi.getMovies()
+    .then((data) => {
+      localStorage.setItem('dataMovie', JSON.stringify(data));
+    })
+    .catch(err => console.log(err))
+  }
+  console.log(document.documentElement.clientWidth)
+  function handleButtonClickMore() {
+    if (document.documentElement.clientWidth > 768 ) {
+      setIndex(index + 3)
+    } else {
+      setIndex(index + 2)
+    }
+
+  }
 
   return (
     <div className="movies">
-      <Header />
-      <SearchForm />
+      <Header onMenuClick={onMenuClick} isMenuVisible={isMenuVisible} onCloseButton={onCloseButton}
+       />
+      <SearchForm onSearchSubmit={handleSubmitClick}/>
       <Preloader />
-      <MoviesCardList buttonMore='true' >
-          <MoviesCard isSaved='true' image={moviePic1} />
-          <MoviesCard isSaved='true' image={moviePic2} />
-          <MoviesCard image={moviePic3} />
-          <MoviesCard image={moviePic4} />
-          <MoviesCard image={moviePic5} />
 
-          <MoviesCard isSaved='true' image={moviePic6} />
-          <MoviesCard isSaved='true' image={moviePic7} />
-          <MoviesCard image={moviePic8} />
+      <MoviesCardList buttonMore='true' onButtonClickMore={handleButtonClickMore} >
+          {visibleData.map((data) => {
 
-          <MoviesCard image={moviePic9} />
-          <MoviesCard image={moviePic10} />
-          <MoviesCard isSaved='true' image={moviePic11} />
-          <MoviesCard image={moviePic12} />
+            return (
+              <MoviesCard 
+              key={data.id}
+              image={`https://api.nomoreparties.co/${data.image.url}`}
+              name={data.nameRU}
+              duration={data.duration}
+              />
+            )
+          })}
       </MoviesCardList>
       <Footer />
     </div>

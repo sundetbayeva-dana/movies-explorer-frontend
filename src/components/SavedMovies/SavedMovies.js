@@ -11,10 +11,10 @@ import moviePic1 from '../../images/posters/pic__movie1.jpg'
 import moviePic2 from '../../images/posters/pic__movie2.jpg'
 import moviePic3 from '../../images/posters/pic__movie3.jpg'
 
-function SavedMovies() {
+function SavedMovies({onMenuClick, isMenuVisible, onCloseButton}) {
   return (
     <>
-      <Header />
+      <Header  onMenuClick={onMenuClick} isMenuVisible={isMenuVisible} onCloseButton={onCloseButton}/>
       <SearchForm />
       <Preloader />
       <div className="saved-movies__cards">

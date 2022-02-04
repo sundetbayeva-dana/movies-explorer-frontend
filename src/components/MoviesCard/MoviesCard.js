@@ -1,7 +1,7 @@
 import React from 'react';
 import './MoviesCard.css';
 
-function MoviesCard ({isSaved, image, isDeleted}) {
+function MoviesCard ({isSaved, image, isDeleted, name, duration}) {
 
   const buttonClassName = (
     `${isDeleted ? 'card__button_delete' : isSaved ? 'card__button_saved' : 'card__button_not-saved'}`    
@@ -13,8 +13,8 @@ function MoviesCard ({isSaved, image, isDeleted}) {
 
   return (
     <div className="card">
-      <h2 className="card__name">В погоне за Бенкси</h2>
-      <p className="card__duration">27 минут</p>
+      <h2 className="card__name">{name}</h2>
+      <p className="card__duration">{duration} минут</p>
       <img className="card__pic" src={image} alt="Обложка фильма"></img>
 
       <button className={buttonClassName} type="button">
