@@ -1,0 +1,284 @@
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../vendor/fonts/Inter-Medium.woff2") format("woff2"),
+      url("../../vendor/fonts/Inter-Medium.woff") format("woff");
+}
+
+.nav_size_1280 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 20px 0 0 44px;
+  align-items: center;
+}
+
+@media screen and (max-width: 1279px) {
+  .nav_size_1280 {
+    display: none;
+  }
+}
+
+.nav__nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav__link {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: right;
+  color: #000000;
+  text-decoration: none;
+  margin-right: 16px;
+}
+
+.nav__link:hover {
+  opacity: 0.7;
+}
+
+.nav__link_active {
+  font-weight: 500;
+}
+
+.nav__button-account {
+  border: 2px solid rgba(170, 170, 170, .2);
+  box-sizing: border-box;
+  border-radius: 50px;
+  width: 100px;
+  height: 32px;
+  background: rgba(250, 250, 250, 1);
+  padding: 0;
+  display: flex;
+  flex-direction: space-between;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.nav__button-account:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.nav__button-text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  color: #000000;
+  margin: 0 0 0 7px;
+}
+
+.nav_size_768 {
+  display: none;
+}
+
+.nav__button-menu {
+  display: none;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .nav_size_768 {
+    display: flex;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity .3s linear;
+    background-color: rgba(0, 0, 0, .3);
+  }
+
+  .nav_size_768_visible {
+    display: flex;
+    visibility: visible;
+    opacity: 1; 
+  }
+
+  .nav__button-menu {
+    display: flex;
+    background: url(../../images/icon-menu.png) no-repeat center;
+    width: 44px;
+    height: 44px;
+    border: none;
+    margin: 15px 0;
+    padding: 0;
+  }
+
+  .nav__menu-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .nav__menu-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: #FAFAFA;
+    width: 520px;
+    margin: 0 0 0 auto;
+  }
+
+  .nav__nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 160px;
+    align-items: center;
+    margin-left: 74px;
+  }
+
+  .nav__link {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    margin: 0 auto 28px;
+    text-decoration: none;
+    width: max-content;
+  }
+
+  .nav__link_active {
+    padding: 0 0 4px;
+    margin: 0 auto 22px;
+    border-bottom: 2px solid #000000;
+  }
+
+  .nav__button-close {
+    background: url(../../images/button-close.svg) no-repeat center;
+    width: 22px;
+    height: 22px;
+    border: none;
+    position: relative;
+    top: 27px;
+    left: 407px;
+  }
+  
+  .nav__button-close:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
+  .nav__button-account {
+    position: relative;
+    top: 903px;
+    left: -150px;
+  }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .nav_size_768 {
+    display: flex;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity .3s linear;
+    background-color: rgba(0, 0, 0, .3);
+  }
+
+  .nav_size_768_visible {
+    display: flex;
+    visibility: visible;
+    opacity: 1; 
+  }
+
+  .nav__button-menu {
+    display: flex;
+    background: url(../../images/icon-menu.png) no-repeat center;
+    width: 22px;
+    height: 25px;
+    border: none;
+    margin: 24px 9px 0 0;
+    padding: 0;
+  }
+
+  .nav__menu-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .nav__menu-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: #FAFAFA;
+    width: 100%;
+    margin: 0;
+  }
+
+  .nav__nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 144px;
+    align-items: center;
+    margin-left: 84px;
+
+  }
+
+  .nav__link {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    margin: 0 auto 24px;
+    text-decoration: none;
+    width: max-content;
+  }
+
+  .nav__link_active {
+    padding: 0 0 7px;
+    margin: 0 auto 14px;
+    border-bottom: 2px solid #000000;
+  }
+
+  .nav__button-close {
+    background: url(../../images/button-close.svg) no-repeat center;
+    box-sizing: border-box;
+    width: 22px;
+    height: 22px;
+    border: none;
+    position: relative;
+    top: 19px;
+    left: 321px;
+    padding: 9px;
+  }
+  
+  .nav__button-close:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
+  .nav__button-account {
+    position: relative;
+    top: 702px;
+    left: -150px;
+  }
+}

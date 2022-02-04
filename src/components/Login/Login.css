@@ -1,0 +1,223 @@
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../vendor/fonts/Inter-Medium.woff2") format("woff2"),
+      url("../../vendor/fonts/Inter-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../vendor/fonts/Inter-Regular.woff2") format("woff2"),
+       url("../../vendor/fonts/Inter-Regular.woff") format("woff");
+}
+
+.login {
+  background-color: #FAFAFA;
+}
+
+.login__content {
+  min-height: 700px;
+  display: flex;
+  width: calc(100% - 2*442px);
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 1150px) and (max-width: 1279px) {
+  .login__content {
+    width: calc(100% - 2*400px);
+  }
+}
+
+@media screen and (min-width: 1050px) and (max-width: 1149px) {
+  .login__content {
+    width: calc(100% - 2*300px);
+  }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1049px) {
+  .login__content {
+    width: calc(100% - 2*250px);
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 899px) {
+  .login__content {
+    width: calc(100% - 2*186px);
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .login__content {
+    width: calc(100% - 2*30px);
+  }
+}
+
+.login__logo-link {
+  margin: 70px 0 40px;
+  width: 38px;
+  height: 38px;
+}
+
+.login__logo-link:hover {
+  opacity: .7;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .login__logo-link {
+    margin: 232px 0 40px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .login__logo-link {
+    margin: 56px auto 0;
+  }
+}
+
+.login__heading {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  width: 100%;
+  margin: 0 0 34px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .login__heading {
+    margin: 50px 0 73px;
+    text-align: center;
+  }
+}
+
+.login__form-label {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #A0A0A0;
+}
+
+.login__form-input {
+  width: calc(100% - 2*15px);
+  height: 16px;
+  background: #F4F4F4;
+  border-radius: 8px;
+  border: none;
+  padding: 15px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 10px 0;
+}
+
+.login__form-input:last-child {
+  color: #EE3465;
+}
+
+.login__error-text {
+  color: #EE3465;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  margin: 0;
+}
+
+.login__button-login {
+  width: 100%;
+  height: 45px;
+  background: #3456F3;
+  border-radius: 3px;
+  margin: 150px 0 0;
+  border: none;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .login__button-login {
+    margin: 240px 0 0;
+  }
+}
+
+.login__button-login:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.login__button-text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .login__button-text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+.login__text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #A0A0A0;
+  margin: 16px 0 0;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .login__text {
+    margin: 16px 0 232px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .login__text {
+    margin: 14px 0 30px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+.login__text-link {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #3456F3;
+  text-decoration: none;
+  margin-left: 6px;
+}
+
+.login__text-link:hover {
+  opacity: 0.7;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .login__text-link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
