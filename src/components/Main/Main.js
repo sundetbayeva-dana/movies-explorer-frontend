@@ -10,7 +10,6 @@ import AboutMe from '../AboutMe/AboutMe';
 
 
 function Main() {
-
   return (
     <div className="Main">
       <Promo />

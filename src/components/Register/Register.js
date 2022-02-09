@@ -3,7 +3,7 @@ import './Register.css';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 
-function Register ({errorMessage}) {
+function Register ({errorMessage, onRegister}) {
 
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -25,6 +25,13 @@ function Register ({errorMessage}) {
     `${errorMessage ? 'register__error-text' : ''}`
   );
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    onRegister(name, email, password)
+  }
+
+
+
   return (
     <div className="register">
       <div className="register__content">
@@ -33,7 +40,7 @@ function Register ({errorMessage}) {
         </Link>
         
         <h1 className="register__heading">Добро пожаловать!</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label className="register__form-label" htmlFor="register__name">Имя</label>
           <input className="register__form-input" id="register__name" type="text" value={name} onChange={handleChangeName} placeholder="Заполните поле имя пользователя" minLength={2} maxLength={20} required></input>
           <label className="register__form-label" htmlFor="register__email">E-mail</label>

@@ -3,7 +3,7 @@ import './Login.css';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 
-function Login ({errorMessage}) {
+function Login ({errorMessage, onSubmit}) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('')
@@ -20,6 +20,11 @@ function Login ({errorMessage}) {
     `${errorMessage ? 'login__error-text' : ''}`
   );
 
+  function handleSubmit(e) {
+    e.preventDefault()
+    onSubmit(email, password)
+  }
+
   return (
     <div className="login">
       <div className="login__content">
@@ -27,7 +32,7 @@ function Login ({errorMessage}) {
           <img src={logo} alt="Логотип сайта" className="login__logo" />
         </Link>        
         <h1 className="login__heading">Рады видеть!</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label className="login__form-label" htmlFor="login__email">E-mail</label>
           <input className="login__form-input" id="login__email" type="email" value={email} onChange={handleChangeEmail} placeholder="Заполните поле email" required></input>
           <label className="login__form-label" htmlFor="login__password" >Пароль</label>

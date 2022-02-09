@@ -13,7 +13,6 @@ function SearchForm({onSearchSubmit}) {
   function handleSubmit(e) {
     e.preventDefault();
     onSearchSubmit()
-
   }
 
   return (

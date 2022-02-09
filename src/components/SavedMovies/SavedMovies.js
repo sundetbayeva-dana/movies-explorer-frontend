@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from '../Header/Header';
 import Preloader from '../Preloader/Preloader';
 import SearchForm  from '../SearchForm/SearchForm';
@@ -6,12 +6,19 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import './SavedMovies.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
+import mainApi from '../../utils/MainApi';
 
-import moviePic1 from '../../images/posters/pic__movie1.jpg'
-import moviePic2 from '../../images/posters/pic__movie2.jpg'
-import moviePic3 from '../../images/posters/pic__movie3.jpg'
+function SavedMovies({onMenuClick, isMenuVisible, onCloseButton }) {
 
-function SavedMovies({onMenuClick, isMenuVisible, onCloseButton}) {
+  const [savedCards, setSavedCards] = React.useState([])
+
+  useEffect(() => {
+    mainApi.getMovies()
+    .then((data) => {
+      console.log(data.data)
+      setSavedCards(data.data)
+    })
+  }, [])
   return (
     <>
       <Header  onMenuClick={onMenuClick} isMenuVisible={isMenuVisible} onCloseButton={onCloseButton}/>
@@ -19,17 +26,23 @@ function SavedMovies({onMenuClick, isMenuVisible, onCloseButton}) {
       <Preloader />
       <div className="saved-movies__cards">
         <MoviesCardList>
-          <MoviesCard isDeleted='true' image={moviePic1} />
-          <MoviesCard isDeleted='true' image={moviePic2} />
-          
-          <MoviesCard isDeleted='true' image={moviePic3} />
+          {savedCards.map((data) => {
+            return (
+              <MoviesCard 
+              key={data._id}
+              id={data._id}
+              image={data.image}
+              name={data.nameRU}
+              duration={data.duration}
+              trailerLink={data.trailer}
+              />
+            )
+          })}
+
         </MoviesCardList>
       </div>
       <Footer />
     </>
-
-
-
   );
 }
 
