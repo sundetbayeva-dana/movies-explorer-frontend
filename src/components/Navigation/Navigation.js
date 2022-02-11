@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navigation.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import iconMan from '../../images/icon-man.svg';
 
 function Navigation ({onMenuClick, isMenuVisible, onCloseButton}) {
@@ -14,10 +14,14 @@ function Navigation ({onMenuClick, isMenuVisible, onCloseButton}) {
           <NavLink to="/movies" className={(navData) => navData.isActive ? "nav__link nav__link_active" : "nav__link"} >Фильмы</NavLink>
           <NavLink to="/saved-movies" className={(navData) => navData.isActive ? "nav__link nav__link_active" : "nav__link"}>Сохраненные фильмы</NavLink>
         </nav>
-        <button className="nav__button-account" type="button">
+        {/* <button className="nav__button-account" type="button">
           <img src={iconMan} alt="войти в аккаунт" />
           <p className="nav__button-text">Аккаунт</p>
-        </button>
+        </button> */}
+        <Link to="/profile" className="nav__button-account" >
+          <img src={iconMan} alt="войти в аккаунт" />
+          <p className="nav__button-text">Аккаунт</p>
+        </Link>
       </div>
       <button className="nav__button-menu" type="button" onClick={onMenuClick} ></button>
       <div className={`nav_size_768 ${menuVisibled}`}>

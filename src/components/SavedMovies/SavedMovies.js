@@ -8,17 +8,19 @@ import './SavedMovies.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
 import mainApi from '../../utils/MainApi';
 
-function SavedMovies({onMenuClick, isMenuVisible, onCloseButton }) {
+function SavedMovies({onMenuClick, isMenuVisible, onCloseButton, savedCardsFromApp, handleButtonDeleteCard }) {
 
   const [savedCards, setSavedCards] = React.useState([])
+  const [isDeleted, setIsDeleted] = React.useState(true)
 
   useEffect(() => {
-    mainApi.getMovies()
-    .then((data) => {
-      console.log(data.data)
-      setSavedCards(data.data)
-    })
-  }, [])
+    setSavedCards(savedCardsFromApp)
+  }, [savedCardsFromApp])
+
+  function onButtonToggleSaveDelete(id) {
+    handleButtonDeleteCard(id, savedCards)
+  }
+
   return (
     <>
       <Header  onMenuClick={onMenuClick} isMenuVisible={isMenuVisible} onCloseButton={onCloseButton}/>
@@ -29,12 +31,14 @@ function SavedMovies({onMenuClick, isMenuVisible, onCloseButton }) {
           {savedCards.map((data) => {
             return (
               <MoviesCard 
-              key={data._id}
-              id={data._id}
+              key={data.movieId}
+              id={data.movieId}
               image={data.image}
               name={data.nameRU}
               duration={data.duration}
               trailerLink={data.trailer}
+              onButtonToggleSaveDelete={onButtonToggleSaveDelete}
+              isDeleted={isDeleted}
               />
             )
           })}

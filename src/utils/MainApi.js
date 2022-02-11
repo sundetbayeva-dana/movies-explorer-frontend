@@ -50,6 +50,14 @@ class MainApi {
     })
     .then(this._handleResponse)
   }
+
+  getUserInformation() {
+    return fetch(`${this._url}/users/me`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+    .then(this._handleResponse)
+  }
 }
 
 const mainApi = new MainApi({

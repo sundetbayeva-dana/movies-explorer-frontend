@@ -1,8 +1,11 @@
 import React, {useEffect} from 'react';
 import './Profile.css';
 import Header from '../Header/Header';
+import {CurrentUserContext} from '../../context/CurrentUserContext'
 
-function Profile ({currentName, currentEmail}) {
+function Profile () {
+
+  const currentUser = React.useContext(CurrentUserContext).data;
 
   const [data, setData] = React.useState({
     name: '',
@@ -12,8 +15,8 @@ function Profile ({currentName, currentEmail}) {
   useEffect(() => {
     setData({
       ...data,
-      name: `${currentName}`,
-      email: `${currentEmail}`
+      name: `${currentUser.name}`,
+      email: `${currentUser.email}`
     })
 }, []); 
 
@@ -30,7 +33,7 @@ function Profile ({currentName, currentEmail}) {
       <Header />
       <div className="profile">
         <div className="profile__content">
-          <h1 className="profile__heading">Привет, {currentName}!</h1>
+          <h1 className="profile__heading">Привет, {currentUser.name}!</h1>
           <form className="profile__form">
             <div className="profile__input-container">
               <label className="profile__form-label" htmlFor="profile__name">Имя</label>

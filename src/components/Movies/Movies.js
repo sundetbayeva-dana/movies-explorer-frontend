@@ -10,16 +10,23 @@ import './Movies.css';
 import moviesApi from '../../utils/MoviesApi'
 import mainApi from '../../utils/MainApi';
 
-function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSave, }) {
+function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard, handleButtonDeleteCard,
+  savedCards, cardsFromApp }) {
 
-  const [cards, setCards] = React.useState([])
   const [index , setIndex] = React.useState(0)
   const [visibleData , setVisibleData] = React.useState([])
   const [cardsCount, setCardsCount] = React.useState(12)
   const [visiblePreloader, setVisiblePreloader] = React.useState(false)
   const [buttonMore, setButtonMore] = React.useState(true)
-  const [savedCards, setSavedCards] = React.useState([])
- 
+  const [cards, setCards] = React.useState([])
+  const [errorMessage, setErrorMessage] = React.useState(false)
+  const [noDataMessage, setNoDataMessage] = React.useState(false)
+
+
+  useEffect(() => {
+    setCards(cardsFromApp)
+  }, [])
+  
 
   useEffect(() => {
     if (document.documentElement.clientWidth > 768 ) {
@@ -44,23 +51,6 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSave, })
     setVisibleData(newCardArray);
   }, [cards, index, cardsCount])
 
-  
-  useEffect(() => {
-    if (localStorage.getItem('dataMovie') === null) {
-      setCards([])
-
-    } else {
-      setCards(JSON.parse(localStorage.getItem('dataMovie')))
-    }    
-  },[])
-
-  useEffect(() => {
-    mainApi.getMovies()
-    .then((data) => {
-      setSavedCards(data.data)
-    }) 
-  }, []) 
-
   function handleSubmitClick() {
     setVisiblePreloader(true)
     moviesApi.getMovies()
@@ -70,19 +60,12 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSave, })
     })
     .then((data) => {
       localStorage.setItem('dataMovie', JSON.stringify(data));
+
+    })    
+    .catch((err) => {
+      console.log(err)
+      setErrorMessage(true)
     })
-    // .then((data) => {
-    //   console.log(data)
-    //   setCards(data.map(i=> {
-    //     return {...i, isSaved: false}
-    //   }))
-    //   return cards
-    // })
-    // .then((cards) => {
-    //   console.log(cards)
-    //   localStorage.setItem('dataMovie', JSON.stringify(cards));
-    // })
-    .catch(err => console.log(err))
     .finally(() => {
       setVisiblePreloader(false)
     })
@@ -96,53 +79,35 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSave, })
     }
   }
 
-  function handleButtonSaveCard(id) {
-    const movie = cards.find(i => i.id === id)
-    mainApi.saveMovie(movie)
-    .then(() => {
-      mainApi.getMovies()
-      .then((data) => {
-        setSavedCards(data.data)
-      })
-    })
-  }
-
-  function handleButtonDeleteCard(id) {  
-    const movie = savedCards.find((i) => {
-      return i.movieId === id
-    })
-    mainApi.deleteMovie(movie._id)
-    .then(() => {
-      mainApi.getMovies()
-      .then((data) => {
-        setSavedCards(data.data)
-      })
-    })
-
-  }
-
+  function handleButtonToggleSaveDelete(id, isSaved) {
+    if (isSaved === false) {
+      handleButtonSaveCard(id, cards)
+    } else {
+      handleButtonDeleteCard(id, savedCards)
+    }
+    
+  } 
 
   return (
     <div className="movies">
       <Header onMenuClick={onMenuClick} isMenuVisible={isMenuVisible} onCloseButton={onCloseButton}
        />
       <SearchForm onSearchSubmit={handleSubmitClick} />
-      <Preloader isVisible={visiblePreloader} />
+      <Preloader isVisible={visiblePreloader} errorMessage={errorMessage}/>
       <MoviesCardList buttonMore={buttonMore} onButtonClickMore={handleButtonClickMore} >
           {visibleData.map((data) => {
             return (
-              <MoviesCard 
-              key={data.id}
-              id={data.id}
-              image={`https://api.nomoreparties.co/${data.image.url}`}
-              name={data.nameRU}
-              duration={data.duration}
-              trailerLink={data.trailerLink}
-              onButtonSave={handleButtonSaveCard}
-              isSaved={data.isSaved}
-              onButtonDelete={handleButtonDeleteCard}
-              savedCards={savedCards}
-              />
+                <MoviesCard 
+                key={data.id}
+                id={data.id}
+                image={`https://api.nomoreparties.co/${data.image.url}`}
+                name={data.nameRU}
+                duration={data.duration}
+                trailerLink={data.trailerLink}
+                onButtonToggleSaveDelete={handleButtonToggleSaveDelete}
+                savedCards={savedCards}
+                isDeleted={false}
+                />              
             )
           })}
       </MoviesCardList>
