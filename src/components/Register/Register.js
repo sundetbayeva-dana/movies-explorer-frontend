@@ -90,10 +90,6 @@ function Register ({errorfromServer, onRegister, }) {
     }
   }
 
-  // function errorMessageReturn() {
-  //   setErrorMessage('')
-  // }
-
   return (
     <div className="register">
       <div className="register__content">

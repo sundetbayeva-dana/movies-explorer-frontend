@@ -60,7 +60,6 @@ class MainApi {
   }
 
   setUserInformation(data) {
-    console.log(data.email)
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {

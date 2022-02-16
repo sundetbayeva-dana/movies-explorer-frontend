@@ -10,7 +10,7 @@ import Login from '../Login/Login';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import mainApi from '../../utils/MainApi';
 import {CurrentUserContext} from '../../context/CurrentUserContext'
-
+import NotFound from '../NotFound/NotFound'
 
 function App() {
 
@@ -20,6 +20,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({})
   const [errorRegister, setErrorRegister] = React.useState('')
   const [errorLogin, setErrorLogin] = React.useState('')
+  const [serverResponseProfile, setServerResponseProfile] = React.useState('')
 
   let navigate = useNavigate()
 
@@ -36,16 +37,16 @@ function App() {
   }, [loggedIn])
 
   useEffect(() => {
-      mainApi.getUserInformation()      
-      .then((data) => {
-        setCurrentUser(data)
-        setLoggedIn(true)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err.status}`)
-      })    
+    mainApi.getUserInformation()      
+    .then((data) => {
+      setCurrentUser(data)
+      setLoggedIn(true)
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err.status}`)
+    })
   },[])
-
+  
   useEffect(() => {
     if (loggedIn === true) {
       navigate('/movies')
@@ -63,18 +64,20 @@ function App() {
   function handleRegister(name, email, password) {
     mainApi.register(name, email, password)
     .then(() => {
-      // handleLogin(email, password)
+      handleLogin(email, password)
     })
     .catch((err) => {
-
+      console.log(`Ошибка: ${err.status}`) 
       return err.json()      
       .then((err) => {
         if (err.message === 'Указан email, который уже существует на сервере') {
           setErrorRegister('Пользователь с таким email уже существует на сервере')
+        } else {
+          setErrorRegister('При регистрации пользователя произошла ошибка')
         }
       })
-      .catch(() => {
-        setErrorRegister('При регистрации пользователя произошла ошибка')
+      .catch((err) => {        
+        console.log(`Ошибка: ${err}`) 
       })
     })
   }
@@ -87,19 +90,22 @@ function App() {
       setCurrentUser(data)
     })
     .catch((err) => {    
-      console.log(`Ошибка: ${err.status}`) 
+      console.log(`Ошибка: ${err.status}`)
       return err.json()
       .then((err) => {
         if (err.message === 'Неправильные почта или пароль') {
           setErrorLogin('Вы ввели неправильный логин или пароль')
         }
-        if (err.message === 'Токен отсутствует') {
+        else if (err.message === 'Токен отсутствует') {
           setErrorLogin('При авторизации произошла ошибка. Токен не передан или передан не в том формате')
+          console.log(`Ошибка: ${err.status}`) 
+        } else {
+          setErrorLogin('При авторизации произошла ошибка. Переданный токен некорректен')
+          console.log(`Ошибка: ${err.status}`)
         }
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err.status}`)
-        setErrorLogin('При авторизации произошла ошибка. Переданный токен некорректен')
+        console.log(`Ошибка: ${err}`)
       })      
     })
   }
@@ -108,9 +114,11 @@ function App() {
     mainApi.setUserInformation(data)
     .then((data) => {
       setCurrentUser(data)
+      setServerResponseProfile('Профиль успешно изменен')
     })
     .catch((err) => {
       console.log(`Ошибка: ${err.status}`)
+      setServerResponseProfile('Произошла ошибка. Попробуйте позже')
     })
   }
 
@@ -148,17 +156,19 @@ function App() {
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
-          <Route element={<ProtectedRoute loggedIn={loggedIn}/>}>          
+          <Route path="/*" element={<NotFound/>}></Route>
+          <Route element={<ProtectedRoute loggedIn={loggedIn}/>}>     
             <Route path="/movies" element={<Movies onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
             onCloseButton={handleMenuCloseButton} handleButtonSaveCard={handleButtonSaveCard}
             handleButtonDeleteCard={handleButtonDeleteCard} savedCardsFromApp={savedCards}
             />}>
             </Route>
-            <Route  path="/saved-movies" element={<SavedMovies onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
+            <Route path="/saved-movies" element={<SavedMovies onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
             onCloseButton={handleMenuCloseButton} savedCardsFromApp={savedCards}handleButtonDeleteCard={handleButtonDeleteCard} />}>
             </Route>
             <Route  path="/profile" element={<Profile onSubmit={handleProfile} 
-            onLogoutClick={handleLogoutClick}
+            onLogoutClick={handleLogoutClick} onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
+            onCloseButton={handleMenuCloseButton} serverResponse={serverResponseProfile}
             />}>
             </Route>
           </Route>
@@ -170,6 +180,7 @@ function App() {
           </Route>
           <Route path="/signin" element={<Login onSubmit={handleLogin} errorfromServer={errorLogin}/>}>
           </Route>
+
 
         </Routes>
       </CurrentUserContext.Provider>

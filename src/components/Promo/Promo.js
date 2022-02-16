@@ -1,6 +1,6 @@
 import React from 'react';
 import './Promo.css';
-import { Link, Outlet, Navigate } from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 import logo from '../../images/logo.svg';
 import backgroundImage from '../../images/promo-background.png'
 import Navigation from '../Navigation/Navigation';
@@ -32,12 +32,8 @@ function Promo ({loggedIn, onMenuClick, isMenuVisible, onCloseButton}) {
             <div className={`promo__header_auth ${headerAuthClassName}`}>
               <Navigation onMenuClick={onMenuClick} isMenuVisible={isMenuVisible}
               onCloseButton={onCloseButton}/>
-            </div>
-            
+            </div>            
           </div>
-          
-          <Outlet />
-
         <h1 className="promo__heading">Учебный проект студента факультета Веб-разработки.</h1>
         <img src={backgroundImage} alt="Фоновое изображение" className="promo__background-image"/>
       </div>      

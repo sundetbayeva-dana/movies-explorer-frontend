@@ -8,8 +8,6 @@ import MoviesCard from '../MoviesCard/MoviesCard'
 import './Movies.css';
 import moviesApi from '../../utils/MoviesApi'
 
-
-
 function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard, handleButtonDeleteCard,
   savedCardsFromApp }) {
 
@@ -23,6 +21,9 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard
   const [savedCards, setSavedCards] = React.useState([])
   const [shortMovie, setShortMovie] = React.useState(false)
   const [isNoData, setisNoData] = React.useState(false)
+  // const [isShortMovie, setisShortMovie] = React.useState(false)
+
+
 
   useEffect(() => {
     if (localStorage.getItem('dataMovie') === null) {
@@ -61,7 +62,6 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard
       setButtonMore(false)
     }
     setVisibleData(newCardArray);
-
   }, [cards, index, cardsCount])
 
   function handleSubmitClick(movieName) {
@@ -122,8 +122,9 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard
       handleButtonDeleteCard(id, savedCards)
     }    
   }
-  function onCheckBox(e) {
-    setShortMovie(e.target.checked)
+  
+  function onCheckBox(isShort) {
+    setShortMovie(isShort)
   }
 
   return (

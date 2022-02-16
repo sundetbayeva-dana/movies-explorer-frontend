@@ -96,9 +96,6 @@ function Login ({errorfromServer, onSubmit}) {
         </p>
         
       </div>
-      
-
-          
     </div>
   )
 }

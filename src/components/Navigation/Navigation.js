@@ -20,23 +20,20 @@ function Navigation ({onMenuClick, isMenuVisible, onCloseButton}) {
         </Link>
       </div>
       <button className="nav__button-menu" type="button" onClick={onMenuClick} ></button>
-      <div className={`nav_size_768 ${menuVisibled}`}>
-        
+      <div className={`nav_size_768 ${menuVisibled}`}>        
         <div className="nav__menu-overlay" onClick={onCloseButton}></div>
         <div className="nav__menu-content">
         <button className="nav__button-close" type="button" onClick={onCloseButton}></button>        
           <nav className="nav__nav">                 
-            <NavLink to="/"  className={(navData) => navData.isActive ? "nav__link nav__link_active" : "nav__link"}>Главная</NavLink> 
+            <NavLink to="/" onClick={onCloseButton} className={(navData) => navData.isActive ? "nav__link nav__link_active" : "nav__link"}>Главная</NavLink> 
             <NavLink to="/movies" onClick={onCloseButton} className={(navData) => navData.isActive ? "nav__link nav__link_active" : "nav__link"}>Фильмы</NavLink>
             <NavLink to="/saved-movies" onClick={onCloseButton} className={(navData) => navData.isActive ? "nav__link nav__link_active" : "nav__link"}>Сохраненные фильмы</NavLink>
           </nav>
-          <Link to="/profile" className="nav__button-account" type="button">
+          <Link to="/profile" className="nav__button-account" type="button" onClick={onCloseButton}>
             <img src={iconMan} alt="войти в аккаунт" />
             <p className="nav__button-text">Аккаунт</p>
           </Link>
-
-        </div>
-      
+        </div>      
       </div>
     </>
   )

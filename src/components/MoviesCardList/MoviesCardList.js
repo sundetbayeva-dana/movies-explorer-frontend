@@ -17,8 +17,6 @@ function MoviesCardList ({children, buttonMore, onButtonClickMore}) {
           <p className="card-list__button-more-text">Еще</p>
         </button>
       </div>
-      
-      
     </div>
   )
 }
