@@ -107,6 +107,7 @@
   font-size: 10px;
   line-height: 12px;
   color: #A0A0A0;
+  display: flex;
 }
 
 .register__form-input {
@@ -150,6 +151,11 @@
 .register__button-register:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.register__button-register:disabled {
+  background : rgba(0,0,0, .2);
+  cursor:auto
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {

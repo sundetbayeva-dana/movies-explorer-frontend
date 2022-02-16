@@ -7,8 +7,8 @@ class MainApi {
   _handleResponse = (res) => {
     if (res.ok) {
       return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    }    
+    return Promise.reject(res);
   }
 
   saveMovie(data) {
@@ -58,11 +58,62 @@ class MainApi {
     })
     .then(this._handleResponse)
   }
+
+  setUserInformation(data) {
+    console.log(data.email)
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        email: data.email,
+        name: data.name,
+      })
+    })
+    .then(this._handleResponse)
+  }
+
+  register(name, email, password) {
+    return fetch(`${this._url}/signup`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password, name })
+    })
+    .then(this._handleResponse)
+  }
+
+  login(email, password) {
+    return fetch(`${this._url}/signin`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password})
+    })
+    .then(this._handleResponse)
+  }
+  
+  logout() {
+    return fetch(`${this._url}/signout`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(this._handleResponse)
+  }
 }
 
 const mainApi = new MainApi({
   url: 'https://api.dana.movieservice.nomoredomains.rocks/api',
-  picUrl: 'http://api.nomoreparties.co',
+  picUrl: 'https://api.nomoreparties.co',
 })
 
 export default mainApi;

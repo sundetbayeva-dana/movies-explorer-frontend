@@ -5,8 +5,7 @@ import logo from '../../images/logo.svg';
 import backgroundImage from '../../images/promo-background.png'
 import Navigation from '../Navigation/Navigation';
 
-function Promo ({loggedIn}) {
-  console.log(loggedIn)
+function Promo ({loggedIn, onMenuClick, isMenuVisible, onCloseButton}) {
   const headerNotAuthClassName = (
     `${!loggedIn && 'promo__header_not-auth_visible'}`
   )
@@ -31,7 +30,8 @@ function Promo ({loggedIn}) {
               </nav>
             </div>
             <div className={`promo__header_auth ${headerAuthClassName}`}>
-              <Navigation />
+              <Navigation onMenuClick={onMenuClick} isMenuVisible={isMenuVisible}
+              onCloseButton={onCloseButton}/>
             </div>
             
           </div>

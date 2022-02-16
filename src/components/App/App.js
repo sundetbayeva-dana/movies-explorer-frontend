@@ -7,10 +7,8 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
-import auth from '../../utils/Auth';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import mainApi from '../../utils/MainApi';
-import moviesApi from '../../utils/MoviesApi'
 import {CurrentUserContext} from '../../context/CurrentUserContext'
 
 
@@ -18,34 +16,34 @@ function App() {
 
   const [menuVisible, setMenuVisible] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false)
-  const [cards, setCards] = React.useState([])
   const [savedCards, setSavedCards] = React.useState([])
   const [currentUser, setCurrentUser] = React.useState({})
+  const [errorRegister, setErrorRegister] = React.useState('')
+  const [errorLogin, setErrorLogin] = React.useState('')
 
   let navigate = useNavigate()
-  
-  useEffect(() => {
-    if (localStorage.getItem('dataMovie') === null) {
-      setCards([])
-    } else {
-      setCards(JSON.parse(localStorage.getItem('dataMovie')))
-    }    
-  },[])
 
   useEffect(() => {
-    mainApi.getMovies()
+    if (loggedIn) {
+      mainApi.getMovies()
       .then((data)=> {
         setSavedCards(data.data)
       })
-
-  }, [])
+      .catch((err) => {
+        console.log(`Ошибка: ${err.status}`)
+      })
+    }   
+  }, [loggedIn])
 
   useEffect(() => {
-    mainApi.getUserInformation()
-    .then((data) => {
-      setCurrentUser(data)
-      setLoggedIn(true)
-    })
+      mainApi.getUserInformation()      
+      .then((data) => {
+        setCurrentUser(data)
+        setLoggedIn(true)
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err.status}`)
+      })    
   },[])
 
   useEffect(() => {
@@ -63,30 +61,67 @@ function App() {
   }
 
   function handleRegister(name, email, password) {
-    auth.register(name, email, password)
-    .then((data) => {
-      console.log(data)
+    mainApi.register(name, email, password)
+    .then(() => {
+      // handleLogin(email, password)
     })
-    .catch(err => console.log(err))
+    .catch((err) => {
+
+      return err.json()      
+      .then((err) => {
+        if (err.message === 'Указан email, который уже существует на сервере') {
+          setErrorRegister('Пользователь с таким email уже существует на сервере')
+        }
+      })
+      .catch(() => {
+        setErrorRegister('При регистрации пользователя произошла ошибка')
+      })
+    })
   }
 
   function handleLogin(email, password) {
-    auth.login(email, password)
+    mainApi.login(email, password)
     .then((data) => {
       setLoggedIn(true)
       navigate('/movies')
+      setCurrentUser(data)
     })
-    .catch(err => console.log(err))
+    .catch((err) => {    
+      console.log(`Ошибка: ${err.status}`) 
+      return err.json()
+      .then((err) => {
+        if (err.message === 'Неправильные почта или пароль') {
+          setErrorLogin('Вы ввели неправильный логин или пароль')
+        }
+        if (err.message === 'Токен отсутствует') {
+          setErrorLogin('При авторизации произошла ошибка. Токен не передан или передан не в том формате')
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err.status}`)
+        setErrorLogin('При авторизации произошла ошибка. Переданный токен некорректен')
+      })      
+    })
+  }
+
+  function handleProfile(data) {
+    mainApi.setUserInformation(data)
+    .then((data) => {
+      setCurrentUser(data)
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err.status}`)
+    })
   }
 
   function handleButtonSaveCard(id, cardArray) {
     const movie = cardArray.find(i => i.id === id)
     mainApi.saveMovie(movie)
     .then((data) => {
-      mainApi.getMovies()
-      .then((data)=> {
-        setSavedCards(data.data)
-      })
+      setSavedCards([data.data, ...savedCards])
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err.status}`)
     })
   }
 
@@ -95,47 +130,49 @@ function App() {
       return i.movieId === id
     })
     mainApi.deleteMovie(movie._id)
-    .then((data) => {
-      mainApi.getMovies()
-      .then((data) => {
-        setSavedCards(data.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    .then(() => {      
+      setSavedCards((state) => state.filter((d) => d.movieId !== id ?? d))
     })
-    .catch((err) => console.log(err))
+    .catch((err) => console.log(`Ошибка: ${err.status}`))
+  }
+
+  function handleLogoutClick() {
+    mainApi.logout()
+    .then((data) => {
+      setLoggedIn(false)
+    })    
+    .catch((err) => console.log(`Ошибка: ${err.status}`))
   }
 
   return (
     <div className="App">
-      <CurrentUserContext.Provider value={currentUser}> 
-
+      <CurrentUserContext.Provider value={currentUser}>
         <Routes>
-       
           <Route element={<ProtectedRoute loggedIn={loggedIn}/>}>          
             <Route path="/movies" element={<Movies onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
             onCloseButton={handleMenuCloseButton} handleButtonSaveCard={handleButtonSaveCard}
-            handleButtonDeleteCard={handleButtonDeleteCard} savedCards={savedCards}
-            cardsFromApp={cards}/>}>
+            handleButtonDeleteCard={handleButtonDeleteCard} savedCardsFromApp={savedCards}
+            />}>
             </Route>
             <Route  path="/saved-movies" element={<SavedMovies onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
             onCloseButton={handleMenuCloseButton} savedCardsFromApp={savedCards}handleButtonDeleteCard={handleButtonDeleteCard} />}>
             </Route>
-            <Route  path="/profile" element={<Profile />}>
+            <Route  path="/profile" element={<Profile onSubmit={handleProfile} 
+            onLogoutClick={handleLogoutClick}
+            />}>
             </Route>
           </Route>
-          <Route path="/" element={<Main loggedIn={loggedIn}/>}>
+          <Route path="/" element={<Main loggedIn={loggedIn} onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
+            onCloseButton={handleMenuCloseButton}/>}>
           </Route>
 
-          <Route path="/signup" element={<Register errorMessage="Что-то пошло не так..." onRegister={handleRegister} />}>
+          <Route path="/signup" element={<Register onRegister={handleRegister} errorfromServer={errorRegister}/>}>
           </Route>
-          <Route path="/signin" element={<Login onSubmit={handleLogin} />}>
+          <Route path="/signin" element={<Login onSubmit={handleLogin} errorfromServer={errorLogin}/>}>
           </Route>
 
-        </Routes>          
+        </Routes>
       </CurrentUserContext.Provider>
-      
     </div>
   );
 }

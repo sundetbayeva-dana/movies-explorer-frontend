@@ -5,7 +5,7 @@ function MoviesCard ({
   id, image, name, duration, trailerLink, onButtonToggleSaveDelete, savedCards, isDeleted }) {
   const [isSaved, setIsSaved] = React.useState(false)
 
-  useEffect(() => {
+    useEffect(() => {
     if (savedCards) {
       savedCards.forEach(i => { 
         if (id === i.movieId) {
@@ -13,7 +13,7 @@ function MoviesCard ({
         } 
       })
     } 
-  }, [id, savedCards])
+  }, [savedCards])
 
   const buttonClassName = (   
     `${isSaved ? 'card__button_saved' : isDeleted ? 'card__button_delete' : 'card__button_not-saved'}`

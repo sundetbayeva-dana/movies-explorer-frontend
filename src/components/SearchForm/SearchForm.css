@@ -93,6 +93,17 @@
   }
 }
 
+.search-form__no-data {
+  width: 100%;
+  color: red;
+  display: none;
+  justify-content: center;
+}
+
+.visible {
+  display: flex;
+}
+
 .search-form__button-search {
   background: url(../../images/find.svg) no-repeat center center;
   width: 34px;
