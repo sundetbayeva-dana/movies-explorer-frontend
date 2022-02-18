@@ -17,6 +17,7 @@ function Profile ({onSubmit, onLogoutClick, onMenuClick, isMenuVisible, onCloseB
   const [nameError, setNameError] = React.useState('')
   const [emailError, setEmailError] = React.useState('')
   const [formValid, setFormValid] = React.useState(false)
+  const [inputChanged, setInputChanged] = React.useState(false)
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -28,19 +29,24 @@ function Profile ({onSubmit, onLogoutClick, onMenuClick, isMenuVisible, onCloseB
   }, []);
 
   useEffect(() => {
-    if (emailError || nameError) {
+    if (emailError || nameError || inputChanged === false) {
       setFormValid(false)
     } else {
       setFormValid(true)
     }
-  }, [emailError, nameError])
+  }, [emailError, nameError, inputChanged])
 
   function handleChange(e) {
     const {name, value} = e.target
     setData({
       ...data,
-      [name]: value
+      [name]: value      
     })
+    if (value === (currentUser.name) || value === (currentUser.email)) {      
+      setInputChanged(false)
+    } else {
+      setInputChanged(true)
+    }
     if (name === 'name') {
       if (!validator.isAlpha(e.target.value, 'ru-RU', {'ignore' : ' -'} ) &&
         !validator.isAlpha(e.target.value, 'en-US', {'ignore' : ' -'} )) {
@@ -61,12 +67,14 @@ function Profile ({onSubmit, onLogoutClick, onMenuClick, isMenuVisible, onCloseB
       } else {
         setEmailError('')
       }
-    }    
+    }  
+
   }
 
   function handleEditClick(e) {
     e.preventDefault();
     onSubmit(data)
+    
   }
 
   const handleblur = (e) => {
