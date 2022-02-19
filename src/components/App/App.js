@@ -41,18 +41,13 @@ function App() {
     .then((data) => {
       setCurrentUser(data)
       setLoggedIn(true)
+      localStorage.setItem('loggedIn', JSON.stringify(true))
     })
     .catch((err) => {
       console.log(`Ошибка: ${err.status}`)
     })
   },[])
   
-  useEffect(() => {
-    if (loggedIn === true) {
-      navigate('/movies')
-    }
-  }, [loggedIn])
-
   function handleMenuClick() {
     setMenuVisible(true);
   }
@@ -86,8 +81,9 @@ function App() {
     mainApi.login(email, password)
     .then((data) => {
       setLoggedIn(true)
-      navigate('/movies')
+      navigate('/movies', {replace: true})
       setCurrentUser(data)
+      localStorage.setItem('loggedIn', JSON.stringify(true))
     })
     .catch((err) => {    
       console.log(`Ошибка: ${err.status}`)
@@ -148,6 +144,7 @@ function App() {
     mainApi.logout()
     .then((data) => {
       setLoggedIn(false)
+      localStorage.setItem('loggedIn', JSON.stringify(false))
     })    
     .catch((err) => console.log(`Ошибка: ${err.status}`))
   }

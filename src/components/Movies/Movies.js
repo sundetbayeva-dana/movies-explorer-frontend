@@ -7,6 +7,8 @@ import Footer from '../Footer/Footer';
 import MoviesCard from '../MoviesCard/MoviesCard'
 import './Movies.css';
 import moviesApi from '../../utils/MoviesApi'
+import { BIG_RESOLUTION, MIDDLE_RESOLUTION, SMALL_RESOLUTION, BIG_RESOLUTION_CARDS_COUNT, MIDDLE_RESOLUTION_CARDS_COUNT,
+  SMALL_RESOLUTION_CARDS_COUNT, SHORT_MOVIE_DURATION} from '../../utils/const'
 
 function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard, handleButtonDeleteCard,
   savedCardsFromApp }) {
@@ -21,9 +23,6 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard
   const [savedCards, setSavedCards] = React.useState([])
   const [shortMovie, setShortMovie] = React.useState(false)
   const [isNoData, setisNoData] = React.useState(false)
-  // const [isShortMovie, setisShortMovie] = React.useState(false)
-
-
 
   useEffect(() => {
     if (localStorage.getItem('dataMovie') === null) {
@@ -42,13 +41,13 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard
   }, [cards])
 
   useEffect(() => {
-    if (document.documentElement.clientWidth > 768 ) {
-      setCardsCount(12);
+    if (document.documentElement.clientWidth > BIG_RESOLUTION ) {
+      setCardsCount(BIG_RESOLUTION_CARDS_COUNT);
     } 
-    if (document.documentElement.clientWidth > 480 && document.documentElement.clientWidth < 768) {
-      setCardsCount(8);
-    } else if (document.documentElement.clientWidth <= 320) {
-      setCardsCount(5);
+    if (document.documentElement.clientWidth > MIDDLE_RESOLUTION && document.documentElement.clientWidth < BIG_RESOLUTION) {
+      setCardsCount(MIDDLE_RESOLUTION_CARDS_COUNT);
+    } else if (document.documentElement.clientWidth <= SMALL_RESOLUTION) {
+      setCardsCount(SMALL_RESOLUTION_CARDS_COUNT);
     }
     const numberOfItems =  cardsCount + ( index );
     const newCardArray = [];
@@ -61,21 +60,25 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard
     if (newCardArray.length === cards.length) {
       setButtonMore(false)
     }
-    setVisibleData(newCardArray);
-  }, [cards, index, cardsCount])
+    if (JSON.parse(localStorage.getItem('checkbox')) === true) {
+      const isLess40min = value => value.duration < SHORT_MOVIE_DURATION
+      let filteredData = cards.filter(isLess40min)
+      setVisibleData(filteredData)
+    } else {
+      setVisibleData(newCardArray);
+    }
+  }, [cards, index, cardsCount, shortMovie])
 
   function handleSubmitClick(movieName) {
     setVisiblePreloader(true)
     moviesApi.getMovies()
     .then((data) => {
       if (shortMovie) {
-        const isMore40min = value => value.duration < 40
-        let filteredData = data.filter(isMore40min)
-        return filteredData
-      } else {
-        const isLess40min = value => value.duration >= 40
+        const isLess40min = value => value.duration < SHORT_MOVIE_DURATION
         let filteredData = data.filter(isLess40min)
         return filteredData
+      } else {
+        return data
       }
     })
     .then((data) => {
@@ -137,17 +140,17 @@ function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard
       <MoviesCardList buttonMore={buttonMore} onButtonClickMore={handleButtonClickMore} >
         {visibleData.map((data) => {
           return (
-              <MoviesCard 
-              key={data.id}
-              id={data.id}
-              image={`https://api.nomoreparties.co/${data.image.url}`}
-              name={data.nameRU}
-              duration={data.duration}
-              trailerLink={data.trailerLink}
-              onButtonToggleSaveDelete={handleButtonToggleSaveDelete}
-              savedCards={savedCards}
-              isDeleted={false}
-              />              
+            <MoviesCard 
+            key={data.id}
+            id={data.id}
+            image={`https://api.nomoreparties.co/${data.image.url}`}
+            name={data.nameRU}
+            duration={data.duration}
+            trailerLink={data.trailerLink}
+            onButtonToggleSaveDelete={handleButtonToggleSaveDelete}
+            savedCards={savedCards}
+            isDeleted={false}
+            />
           )
         })}
       </MoviesCardList>

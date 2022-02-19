@@ -29,6 +29,10 @@ function Profile ({onSubmit, onLogoutClick, onMenuClick, isMenuVisible, onCloseB
   }, []);
 
   useEffect(() => {
+    setInputChanged(false)
+  }, [currentUser])
+
+  useEffect(() => {
     if (emailError || nameError || inputChanged === false) {
       setFormValid(false)
     } else {
@@ -67,14 +71,12 @@ function Profile ({onSubmit, onLogoutClick, onMenuClick, isMenuVisible, onCloseB
       } else {
         setEmailError('')
       }
-    }  
-
+    }
   }
 
   function handleEditClick(e) {
     e.preventDefault();
-    onSubmit(data)
-    
+    onSubmit(data)    
   }
 
   const handleblur = (e) => {

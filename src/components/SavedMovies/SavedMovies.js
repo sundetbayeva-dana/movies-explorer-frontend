@@ -6,6 +6,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import './SavedMovies.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
+import { SHORT_MOVIE_DURATION } from '../../utils/const'
 
 
 function SavedMovies({onMenuClick, isMenuVisible, onCloseButton, savedCardsFromApp, handleButtonDeleteCard }) {
@@ -20,8 +21,15 @@ function SavedMovies({onMenuClick, isMenuVisible, onCloseButton, savedCardsFromA
   }, [savedCardsFromApp])
 
   useEffect(() => {
-    setVisibleData(savedCards)
-  }, [savedCards])
+    if (shortMovie) {
+      const isLess40min = value => value.duration < SHORT_MOVIE_DURATION
+      let filteredData = savedCards.filter(isLess40min)
+      setVisibleData(filteredData)
+    } else {
+      setVisibleData(savedCards)
+    }
+
+  }, [savedCards, shortMovie])
 
 
   function onButtonToggleSaveDelete(id) {
@@ -32,13 +40,11 @@ function SavedMovies({onMenuClick, isMenuVisible, onCloseButton, savedCardsFromA
     function isShortMovie(arr) {
       setSavedCards(savedCardsFromApp)
       if (shortMovie) {
-        const isMore40min = value => value.duration < 40
-        let filteredData = arr.filter(isMore40min)
-        return filteredData
-      } if (!shortMovie) {
-        const isLess40min = value => value.duration >= 40
+        const isLess40min = value => value.duration < SHORT_MOVIE_DURATION
         let filteredData = arr.filter(isLess40min)
         return filteredData
+      } if (!shortMovie) {
+        return arr
       }
     }
     let filteredDurationData = isShortMovie(savedCards)
@@ -63,8 +69,8 @@ function SavedMovies({onMenuClick, isMenuVisible, onCloseButton, savedCardsFromA
     check(filteredNameData, filteredDescriptionData)
   }
 
-  function onCheckBox(e) {
-    setShortMovie(e.target.checked)
+  function onCheckBox(isShort) {
+    setShortMovie(isShort)
   }
   
   return (
