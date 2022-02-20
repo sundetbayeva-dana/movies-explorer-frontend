@@ -72,7 +72,7 @@ function App() {
         }
       })
       .catch((err) => {        
-        console.log(`Ошибка: ${err}`) 
+        console.log(`Ошибка: ${err}`)
       })
     })
   }
@@ -155,7 +155,6 @@ function App() {
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
-          <Route path="*" element={<NotFound/>}></Route>
           <Route element={<ProtectedRoute />}>     
             <Route path="/movies" element={<Movies onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
             onCloseButton={handleMenuCloseButton} handleButtonSaveCard={handleButtonSaveCard}
@@ -170,7 +169,7 @@ function App() {
             onCloseButton={handleMenuCloseButton} serverResponse={serverResponseProfile}
             />}>
             </Route>
-            </Route> 
+          </Route> 
           
           <Route path="/" element={<Main loggedIn={loggedIn} onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
             onCloseButton={handleMenuCloseButton}/>}>

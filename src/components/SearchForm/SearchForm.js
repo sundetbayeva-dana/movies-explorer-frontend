@@ -6,11 +6,15 @@ function SearchForm({onSearchSubmit, onCheckBox}) {
 
   const [movieName, setMovieName] = React.useState('')
   const [noDataMessage, setNoDataMessage] = React.useState(false)
-  const [isChecked, setisChecked] = React.useState(false)  
+  const [isChecked, setisChecked] = React.useState(false)
 
   useEffect(() => {
     setisChecked(JSON.parse(localStorage.getItem('checkbox')))
   }, [])
+
+  useEffect(() => {
+    onCheckBox(isChecked)
+  }, [isChecked])
 
   function handleNameMovieChange(e) {
     setMovieName(e.target.value)
@@ -22,8 +26,7 @@ function SearchForm({onSearchSubmit, onCheckBox}) {
       onSearchSubmit(movieName)
       setNoDataMessage(false)
       setMovieName('')
-
-    } else {
+    } else if (movieName.length === 0) {
       setNoDataMessage(true)
     }
   }
@@ -39,7 +42,6 @@ function SearchForm({onSearchSubmit, onCheckBox}) {
     } else {
       localStorage.setItem('checkbox', JSON.stringify(false));
     }
-    onCheckBox(!isChecked)    
   }
 
   const checkBoxClassName = (
@@ -49,7 +51,7 @@ function SearchForm({onSearchSubmit, onCheckBox}) {
   return (
     <div className="search-form">
       <div className="search-form__content">
-        <form className="search-form__form" onSubmit={handleSubmit}>
+        <form className="search-form__form" onSubmit={handleSubmit} noValidate>
           <img src={searchIcon} alt="иконка поисковика фильмов" className="search-form__icon"/>
           <input placeholder="Фильм" className="search-form__form-text" name="name"
           value={movieName || ''} onChange={handleNameMovieChange} required></input>    
