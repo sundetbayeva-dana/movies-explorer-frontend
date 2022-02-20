@@ -26,7 +26,7 @@ function SearchForm({onSearchSubmit, onCheckBox}) {
       onSearchSubmit(movieName)
       setNoDataMessage(false)
       setMovieName('')
-    } else if (movieName.length === 0) {
+    } else {
       setNoDataMessage(true)
     }
   }
