@@ -7,7 +7,8 @@ import { useNavigate  } from 'react-router-dom';
 
 function Profile ({onSubmit, onLogoutClick, onMenuClick, isMenuVisible, onCloseButton, serverResponse}) {
 
-  const currentUser = React.useContext(CurrentUserContext).data;
+  const currentUser = React.useContext(CurrentUserContext);
+
   const [data, setData] = React.useState({
     name: '',
     email: '',
@@ -23,10 +24,10 @@ function Profile ({onSubmit, onLogoutClick, onMenuClick, isMenuVisible, onCloseB
   useEffect(() => {
     setData({
       ...data,
-      name: `${currentUser.name}`,
-      email: `${currentUser.email}`
+      name: currentUser.name,
+      email: currentUser.email
     })
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     setInputChanged(false)
@@ -107,14 +108,14 @@ function Profile ({onSubmit, onLogoutClick, onMenuClick, isMenuVisible, onCloseB
               <label className="profile__form-label" htmlFor="profile__name">Имя</label>
               <input className="profile__form-input" id="profile__name" name="name" type="text" 
               value={data.name} onChange={handleChange} placeholder="Заполните поле имя пользователя" 
-              minLength={2} maxLength={20} onBlur={e => handleblur(e)} required></input>                           
+              minLength={2} maxLength={20} onBlur={e => handleblur(e)} required></input>
             </div>
             {(nameError && nameDirty) && <span className="profile__error-text">{nameError}</span>} 
             <div className="profile__input-container">
               <label className="profile__form-label" htmlFor="profile__email">E-mail</label>
               <input className="profile__form-input" id="profile__email" name="email" type="email"
               value={data.email} onChange={handleChange} placeholder="Заполните поле email" 
-              onBlur={e => handleblur(e)} required></input>              
+              onBlur={e => handleblur(e)} required></input>
             </div>
             {(emailError && emailDirty) && <span className="profile__error-text">{emailError}</span>}
             <p className="profile__text">{serverResponse}</p>

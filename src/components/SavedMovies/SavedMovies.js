@@ -6,7 +6,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import './SavedMovies.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
-import { SHORT_MOVIE_DURATION } from '../../utils/const'
+import { SHORT_MOVIE_DURATION } from '../../utils/config'
 
 
 function SavedMovies({onMenuClick, isMenuVisible, onCloseButton, savedCardsFromApp, handleButtonDeleteCard }) {

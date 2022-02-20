@@ -37,9 +37,9 @@ function App() {
   }, [loggedIn])
 
   useEffect(() => {
-    mainApi.getUserInformation()      
+    mainApi.getUserInformation()
     .then((data) => {
-      setCurrentUser(data)
+      setCurrentUser(data.data)
       setLoggedIn(true)
       localStorage.setItem('loggedIn', JSON.stringify(true))
     })
@@ -81,11 +81,13 @@ function App() {
     mainApi.login(email, password)
     .then((data) => {
       setLoggedIn(true)
-      navigate('/movies', {replace: true})
-      setCurrentUser(data)
-      localStorage.setItem('loggedIn', JSON.stringify(true))
+      localStorage.setItem('loggedIn', JSON.stringify(true))      
+      setCurrentUser(data.data)
     })
-    .catch((err) => {    
+    .then(() => {
+      navigate('/movies', {replace: true})
+    })
+    .catch((err) => {
       console.log(`Ошибка: ${err.status}`)
       return err.json()
       .then((err) => {
@@ -109,7 +111,7 @@ function App() {
   function handleProfile(data) {
     mainApi.setUserInformation(data)
     .then((data) => {
-      setCurrentUser(data)
+      setCurrentUser(data.data)
       setServerResponseProfile('Профиль успешно изменен')
     })
     .catch((err) => {
@@ -153,8 +155,8 @@ function App() {
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
-          <Route path="/*" element={<NotFound/>}></Route>
-          <Route element={<ProtectedRoute loggedIn={loggedIn}/>}>     
+          <Route path="*" element={<NotFound/>}></Route>
+          <Route element={<ProtectedRoute />}>     
             <Route path="/movies" element={<Movies onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
             onCloseButton={handleMenuCloseButton} handleButtonSaveCard={handleButtonSaveCard}
             handleButtonDeleteCard={handleButtonDeleteCard} savedCardsFromApp={savedCards}
@@ -168,16 +170,16 @@ function App() {
             onCloseButton={handleMenuCloseButton} serverResponse={serverResponseProfile}
             />}>
             </Route>
-          </Route>
+            </Route> 
+          
           <Route path="/" element={<Main loggedIn={loggedIn} onMenuClick={handleMenuClick} isMenuVisible={menuVisible}
             onCloseButton={handleMenuCloseButton}/>}>
           </Route>
-
           <Route path="/signup" element={<Register onRegister={handleRegister} errorfromServer={errorRegister}/>}>
           </Route>
           <Route path="/signin" element={<Login onSubmit={handleLogin} errorfromServer={errorLogin}/>}>
           </Route>
-
+          <Route path="*" element={<NotFound/>}></Route>
 
         </Routes>
       </CurrentUserContext.Provider>

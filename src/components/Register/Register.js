@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './Register.css';
 import logo from '../../images/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import validator from 'validator';
 
 function Register ({errorfromServer, onRegister, }) {
@@ -18,6 +18,13 @@ function Register ({errorfromServer, onRegister, }) {
   const [formValid, setFormValid] = React.useState(false)
   const [errorMessage, setErrorMessage] = React.useState('')
 
+  let navigate = useNavigate()
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('loggedIn')) === true) {
+      navigate('/', {replace: true})
+    }
+  })
 
   useEffect(() => {
     if (emailError || nameError || passwordError) {

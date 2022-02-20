@@ -8,7 +8,7 @@ import MoviesCard from '../MoviesCard/MoviesCard'
 import './Movies.css';
 import moviesApi from '../../utils/MoviesApi'
 import { BIG_RESOLUTION, MIDDLE_RESOLUTION, SMALL_RESOLUTION, BIG_RESOLUTION_CARDS_COUNT, MIDDLE_RESOLUTION_CARDS_COUNT,
-  SMALL_RESOLUTION_CARDS_COUNT, SHORT_MOVIE_DURATION} from '../../utils/const'
+  SMALL_RESOLUTION_CARDS_COUNT, SHORT_MOVIE_DURATION} from '../../utils/config'
 
 function Movies({onMenuClick, isMenuVisible, onCloseButton, handleButtonSaveCard, handleButtonDeleteCard,
   savedCardsFromApp }) {

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './Login.css';
 import logo from '../../images/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import validator from 'validator';
 
 function Login ({errorfromServer, onSubmit}) {
@@ -14,6 +14,14 @@ function Login ({errorfromServer, onSubmit}) {
   const [passwordError, setPasswordError] = React.useState('поле пароль не может быть пустым')
   const [formValid, setFormValid] = React.useState(false)
   const [errorMessage, setErrorMessage] = React.useState('')
+
+  let navigate = useNavigate()
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('loggedIn')) === true) {
+      navigate('/', {replace: true})
+    }
+  })
 
   useEffect(() => {
     if (emailError || passwordError) {
