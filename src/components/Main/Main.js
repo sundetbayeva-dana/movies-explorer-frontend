@@ -9,11 +9,11 @@ import Footer from '../Footer/Footer';
 import AboutMe from '../AboutMe/AboutMe';
 
 
-function Main() {
-
+function Main({loggedIn, onMenuClick, isMenuVisible, onCloseButton}) {
   return (
     <div className="Main">
-      <Promo />
+      <Promo loggedIn={loggedIn} onMenuClick={onMenuClick} isMenuVisible={isMenuVisible}
+      onCloseButton={onCloseButton}/>
       <NavTab />
       <AboutProject />
       <Techs />

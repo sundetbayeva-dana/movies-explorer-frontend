@@ -1,0 +1,7 @@
+export const BIG_RESOLUTION = 768;
+export const MIDDLE_RESOLUTION = 480;
+export const SMALL_RESOLUTION = 320;
+export const BIG_RESOLUTION_CARDS_COUNT = 12;
+export const MIDDLE_RESOLUTION_CARDS_COUNT = 8;
+export const SMALL_RESOLUTION_CARDS_COUNT = 5;
+export const SHORT_MOVIE_DURATION = 40;
